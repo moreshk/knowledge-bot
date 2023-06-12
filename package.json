@@ -13,31 +13,35 @@
     "lint": "eslint --ignore-path .gitignore \"**/*.+(ts|js|tsx)\"",
     "format": "prettier --ignore-path .gitignore \"**/*.+(ts|js|tsx)\" --write",
     "ingest": "tsx -r dotenv/config scripts/ingest-data.ts",
-    "ingest-text": "tsx -r dotenv/config scripts/ingest-text-data.ts",
-    "ingest-git": "tsx -r dotenv/config scripts/ingest-git.ts",
-    "ingest-url": "tsx -r dotenv/config scripts/ingest-url.ts"
+    "ingest-scrap-website": "tsx -r dotenv/config scripts/ingest-website-data.ts",
+    "parse": "tsx -r dotenv/config scripts/parser.ts"
   },
   "dependencies": {
     "@microsoft/fetch-event-source": "^2.0.1",
-    "@pinecone-database/pinecone": "0.0.14",
+    "@pinecone-database/pinecone": "0.0.12",
     "@radix-ui/react-accordion": "^1.1.1",
-    "@supabase/supabase-js": "^2.24.0",
+    "@types/turndown": "^5.0.1",
     "cheerio": "^1.0.0-rc.12",
     "clsx": "^1.2.1",
     "dotenv": "^16.0.3",
-    "langchain": "0.0.82",
+    "langchain": "0.0.55",
     "lucide-react": "^0.125.0",
     "next": "13.2.3",
     "pdf-parse": "1.1.1",
-    "puppeteer": "^19.11.1",
+    "puppeteer": "^20.5.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-markdown": "^8.0.5",
-    "supabase": "^1.64.8",
     "tailwind-merge": "^1.10.0",
-    "zustand": "^4.3.8"
+    "turndown": "^7.1.2"
   },
   "devDependencies": {
+    "@supabase/auth-helpers-nextjs": "^0.7.2",
+    "@supabase/auth-helpers-react": "^0.3.1",
+    "@supabase/auth-ui-react": "^0.3.3",
+    "@supabase/auth-ui-shared": "^0.1.2",
+    "@supabase/supabase-js": "^2.10.0",
+    "@supabase/ui": "^0.36.5",
     "@types/node": "^18.14.6",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
@@ -50,6 +54,9 @@
     "tailwindcss": "^3.2.7",
     "tsx": "^3.12.3",
     "typescript": "^4.9.5"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "keywords": [
     "starter",
