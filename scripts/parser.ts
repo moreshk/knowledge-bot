@@ -3,8 +3,8 @@ import { PromptTemplate } from "langchain/prompts";
 import { StructuredOutputParser } from "langchain/output_parsers";
 import { getChatbotQuestions, getUserResponses } from "@/utils/supabase-client";
 
-const chatbotId = 'd10b61c6-ad1c-421d-b538-b927ac806cc3';
-const sessionId = '1d5fec3a-a345-4f1d-8add-dfad583ef388';
+const chatbotId = 'c6a4cdd5-725e-4041-962e-1ce64358c20a';
+const sessionId = 'a486a66f-5c0a-4dcf-9343-0e5819301dc9';
 
 const questions = await getChatbotQuestions(chatbotId);
 const responses = await getUserResponses(sessionId, chatbotId);
