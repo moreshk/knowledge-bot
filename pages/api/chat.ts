@@ -12,7 +12,7 @@ export default async function handler(
   const { question, history, namespace } = req.body;
 
   console.log('question', question);
-  console.log('question', namespace);
+  console.log('namespace', namespace);
 
   //only accept post requests
   if (req.method !== 'POST') {

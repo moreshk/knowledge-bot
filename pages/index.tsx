@@ -12,8 +12,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import {useRouter} from 'next/router';
+
 
 export default function Home() {
+  const chatbotid = useRouter().query?.chatbotId as string;
+
   const [query, setQuery] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -77,6 +81,7 @@ export default function Home() {
         body: JSON.stringify({
           question,
           history,
+          namespace : chatbotid
         }),
       });
       const data = await response.json();
