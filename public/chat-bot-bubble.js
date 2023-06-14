@@ -2,7 +2,7 @@ const container = document.createElement('div')
 const iframe = document.createElement('iframe')
 const currentScript = document.currentScript;
 const chatbotId = currentScript.getAttribute('data-chatbot-id');
-iframe.src = `https://leadqualifier.koretex.ai/?chatbotId=${chatbotId}`
+iframe.src = `https://knowledge-bot-pearl.vercel.app/?chatbotId=${chatbotId}`
 iframe.style.display = 'none'
 iframe.id = 'my-iframe'
 iframe.style.border = 'none'
