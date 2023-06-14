@@ -14,7 +14,8 @@
     "format": "prettier --ignore-path .gitignore \"**/*.+(ts|js|tsx)\" --write",
     "ingest": "tsx -r dotenv/config scripts/ingest-data.ts",
     "ingest-scrap-website": "tsx -r dotenv/config scripts/ingest-website-data.ts",
-    "parse": "tsx -r dotenv/config scripts/parser.ts"
+    "parse": "tsx -r dotenv/config scripts/parser.ts",
+    "ingest-url-param": "tsx -r dotenv/config scripts/ingest-url-params.ts"
   },
   "dependencies": {
     "@microsoft/fetch-event-source": "^2.0.1",
