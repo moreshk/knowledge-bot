@@ -23,7 +23,7 @@
   resize: none;
   font-size: 1.1rem;
   padding: 1rem 2rem 1rem 2rem;
-  width: 75vw;
+  width: 100%;
   border-radius: 0.5rem;
   border: 1px solid #d9d9e3;
   background: #ffffff;
@@ -83,7 +83,7 @@
 .messagelist {
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   border-radius: 0.5rem;
 }
 
@@ -94,17 +94,14 @@
   margin-top: 1rem;
 }
 
-.usermessage {
-  background: #ffffff;
-  padding: 1.5rem;
-  color: #000;
-}
-
 .usermessagewaiting {
-  padding: 1.5rem;
-  color: #000;
-  background: linear-gradient(to left, #07080938, #1a1c2024, #07080936);
-  background-size: 200% 200%;
+  padding: 0.5rem 1rem;
+  margin: 10px;
+  color: #f2efef;
+  background: linear-gradient(to left, #6f71f1, #8c8de9, #aeb0f0);
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: flex-end;
   background-position: -100% 0;
   animation: loading-gradient 2s ease-in-out infinite;
   animation-direction: alternate;
@@ -120,11 +117,33 @@
   }
 }
 
+.usermessage {
+  color: #fff;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.userbg {
+  background: #6366f1;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin: 10px;
+  color: white;
+  margin-left: 200px;
+}
+
 .apimessage {
-  background: #f9fafb;
-  padding: 1.5rem;
   color: #000;
   animation: fadein 0.5s;
+}
+
+.apibg {
+  background: #eef6fb;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin: 10px;
+  margin-right: 200px;
 }
 
 @keyframes fadein {
@@ -189,11 +208,8 @@
 }
 
 .cloud {
-  width: 75vw;
   height: 65vh;
   background: #ffffff;
-  border-radius: 0.5rem;
-  border: 1px solid #d9d9e3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -259,4 +275,20 @@
     width: 100%;
     text-align: center;
   }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animateBlink {
+  animation: blink 1s infinite;
 }
