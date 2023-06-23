@@ -11,8 +11,8 @@ export const run = async (url: string, namespace: string) => {
         const rawMarkdownData = await loader.load();
         /* Split text into chunks */
         const textSplitter = new RecursiveCharacterTextSplitter({
-            chunkSize: 1000,
-            chunkOverlap: 200,
+            chunkSize: 4000,
+            chunkOverlap: 800,
         });
 
         const docs = await textSplitter.splitDocuments(rawMarkdownData);
