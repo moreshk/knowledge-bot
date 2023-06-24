@@ -11,7 +11,8 @@ import { useStore } from "zustand";
 import { useBotDetails } from "@/store/useBotDetails";
 
 export default function Home() {
-  const { name, initial_message, bot_profile_pic } = useStore(useBotDetails);
+  const { name, initial_message, bot_profile_pic, setChatbotDetails } =
+    useStore(useBotDetails);
   const containerRef = useRef<HTMLDivElement>(null);
   const chatbotid = useRouter().query?.chatbotId as string;
   const showSource = useRouter().query?.source as string;
@@ -151,6 +152,9 @@ export default function Home() {
         </div>
         <div className="flex items-center gap-3">
           <svg
+            onClick={() => {
+              setChatbotDetails();
+            }}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
