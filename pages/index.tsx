@@ -12,7 +12,7 @@ import { useBotDetails } from "@/store/useBotDetails";
 
 export default function Home() {
   const { name, initial_message, bot_profile_pic } = useStore(useBotDetails);
-
+  const containerRef = useRef<HTMLDivElement>(null);
   const chatbotid = useRouter().query?.chatbotId as string;
   const showSource = useRouter().query?.source as string;
   const [query, setQuery] = useState<string>("");
@@ -167,7 +167,7 @@ export default function Home() {
           <div className="w-5 h-5"></div>
         </div>
       </div>
-      <div className={styles.cloud}>
+      <div className={styles.cloud} ref={containerRef}>
         <div ref={messageListRef} className={styles.messagelist}>
           {messages.map((message, index) => {
             if (
@@ -182,7 +182,15 @@ export default function Home() {
                     message.type === "apiMessage" ? styles.apibg : styles.userbg
                   } flex  gap-1 items-center`}
                 >
-                  <StreamingComponent message={message.message} />
+                  <StreamingComponent
+                    message={message.message}
+                    callBack={() => {
+                      containerRef.current?.scrollTo(
+                        0,
+                        containerRef.current.scrollHeight
+                      );
+                    }}
+                  />
                 </div>
               );
             }
@@ -224,7 +232,6 @@ export default function Home() {
           })}
         </div>
       </div>
-
       <form onSubmit={handleSubmit} className="relative px-4">
         <textarea
           disabled={loading}

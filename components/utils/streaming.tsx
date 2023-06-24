@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import styles from "@/styles/Home.module.css";
 
-const StreamingComponent = ({ message }: { message: string }) => {
+const StreamingComponent = ({
+  message,
+  callBack,
+}: {
+  message: string;
+  callBack: () => void;
+}) => {
   const [streamData, setStreamData] = useState("");
   const [completed, setCompleted] = useState(false); // New state variable for completion status
 
@@ -22,6 +28,7 @@ const StreamingComponent = ({ message }: { message: string }) => {
       setStreamData((prevData) => prevData + nextCharacter);
 
       currentIndex++;
+      callBack();
     }, 30); // Adjust the interval as needed (e.g., every 1 second)
 
     return () => {
