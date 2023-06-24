@@ -33,7 +33,9 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-markdown": "^8.0.5",
+    "react-tooltip": "^5.15.0",
     "supabase": "^1.68.6",
+    "tabler-icons-react": "^1.56.0",
     "tailwind-merge": "^1.10.0",
     "turndown": "^7.1.2",
     "zustand": "^4.3.8"

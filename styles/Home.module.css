@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  max-height: 100vh;
 }
 
 .header {
@@ -26,9 +27,10 @@
   width: 100%;
   border-radius: 0.5rem;
   border: 1px solid #d9d9e3;
-  background: #ffffff;
+  background: transparent;
   color: #000;
   outline: none;
+  box-shadow: 0 0 5px rgba(156, 163, 175, 0.5);
 }
 
 .textarea:disabled {
@@ -120,8 +122,6 @@
 .usermessage {
   color: #fff;
   border-radius: 0.5rem;
-  display: flex;
-  justify-content: flex-end;
 }
 
 .userbg {
@@ -130,7 +130,8 @@
   border-radius: 0.5rem;
   margin: 10px;
   color: white;
-  margin-left: 200px;
+  text-align: right;
+  display: inline-block;
 }
 
 .apimessage {
@@ -143,7 +144,9 @@
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   margin: 10px;
-  margin-right: 200px;
+  color: black;
+  display: inline-block;
+  text-align: left;
 }
 
 @keyframes fadein {
@@ -208,7 +211,7 @@
 }
 
 .cloud {
-  height: 65vh;
+  height: 77vh;
   background: #ffffff;
   display: flex;
   justify-content: center;
@@ -245,12 +248,12 @@
 @media (max-width: 600px) {
   .main {
     padding: 1rem;
-    max-height: 90vh;
+    max-height: 100vh;
   }
 
   .cloud {
-    width: 22rem;
-    height: 28rem;
+    width: 100%;
+    height: 73vh;
   }
   .textarea {
     width: 22rem;
