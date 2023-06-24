@@ -14,6 +14,22 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { setChatbotDetails, loading } = useStore(useBotDetails);
 
   useEffect(() => {
+    window.addEventListener("resize", function () {
+      document.documentElement.style.setProperty(
+        "--vh",
+        window.innerHeight * 0.01 + "px"
+      );
+    });
+
+    window.addEventListener("load", function () {
+      document.documentElement.style.setProperty(
+        "--vh",
+        window.innerHeight * 0.01 + "px"
+      );
+    });
+  }, []);
+
+  useEffect(() => {
     setChatbotDetails();
   }, []);
 
