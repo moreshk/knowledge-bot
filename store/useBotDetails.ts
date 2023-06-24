@@ -34,6 +34,7 @@ export const useBotDetails = create<ChatbotDetailsStore>(set => ({
    .eq('id', chatbotId);
   if (error) {
    console.log(error);
+   set((oldData) => ({ ...oldData, loading: false }))
    return;
   }
   if (data && data.length > 0) {
