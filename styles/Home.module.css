@@ -211,7 +211,7 @@
 }
 
 .cloud {
-  height: calc((var(--vh, 1vh) * 100) - 180px);
+  height: calc((var(--vh, 1vh) * 100) - 170px);
   display: flex;
   justify-content: center;
   align-items: center;
