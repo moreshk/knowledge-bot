@@ -1,10 +1,10 @@
+import { useBotDetails } from "@/store/useBotDetails";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-
 import { useStore } from "zustand";
 
 export const DisclaimerButton = () => {
-  const disclaimer = "disclaimer";
+  const { disclaimer } = useStore(useBotDetails);
 
   return (
     <div>

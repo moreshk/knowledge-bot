@@ -7,8 +7,12 @@ import { Document } from "langchain/document";
 import { useRouter } from "next/router";
 import StreamingComponent from "@/components/utils/streaming";
 import { DisclaimerButton } from "@/components/ui/DisclaimerButton";
+import { useStore } from "zustand";
+import { useBotDetails } from "@/store/useBotDetails";
 
 export default function Home() {
+  const { name, initial_message, bot_profile_pic } = useStore(useBotDetails);
+
   const chatbotid = useRouter().query?.chatbotId as string;
   const showSource = useRouter().query?.source as string;
   const [query, setQuery] = useState<string>("");
@@ -22,7 +26,9 @@ export default function Home() {
   }>({
     messages: [
       {
-        message: "Hi, what would you like to learn about this document?",
+        message: initial_message
+          ? initial_message
+          : "Hi, what would you like to learn about this document?",
         type: "apiMessage",
       },
     ],
@@ -131,15 +137,17 @@ export default function Home() {
       <div className="h-16 bg-black text-white rounded-b-sm flex justify-between px-4 items-center">
         <div className="flex space-x-2 items-center justify-center">
           <div>
-            <img
-              className="w-10 h-10 rounded-full object-contain"
-              src={`https://picsum.photos/200`}
-              alt="Bot profile picture"
-              width={48}
-              height={48}
-            />
+            {bot_profile_pic && (
+              <img
+                className="w-10 h-10 rounded-full object-contain"
+                src={bot_profile_pic}
+                alt="Bot profile picture"
+                width={48}
+                height={48}
+              />
+            )}
           </div>
-          <div>Name</div>
+          <div>{name}</div>
         </div>
         <div>
           <svg
