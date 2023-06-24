@@ -133,7 +133,11 @@ export default function Home() {
     }
   };
   return (
-    <div className="bg-white h-allscreen">
+    <div
+      className={`bg-white  ${
+        showSource === "true" ? "h-allscreen-auto" : "h-allscreen"
+      }`}
+    >
       <div className="h-16 bg-black text-white rounded-b-sm flex justify-between px-4 items-center">
         <div className="flex space-x-2 items-center justify-center">
           <div>
