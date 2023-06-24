@@ -13,7 +13,6 @@ import { useBotDetails } from "@/store/useBotDetails";
 export default function Home() {
   const { name, initial_message, bot_profile_pic, setChatbotDetails } =
     useStore(useBotDetails);
-  const containerRef = useRef<HTMLDivElement>(null);
   const chatbotid = useRouter().query?.chatbotId as string;
   const showSource = useRouter().query?.source as string;
   const [query, setQuery] = useState<string>("");
@@ -152,9 +151,7 @@ export default function Home() {
         </div>
         <div className="flex items-center gap-3">
           <svg
-            onClick={() => {
-              setChatbotDetails();
-            }}
+            onClick={setChatbotDetails}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -171,7 +168,7 @@ export default function Home() {
           <div className="w-5 h-5"></div>
         </div>
       </div>
-      <div className={styles.cloud} ref={containerRef}>
+      <div className={styles.cloud}>
         <div ref={messageListRef} className={styles.messagelist}>
           {messages.map((message, index) => {
             if (
@@ -189,10 +186,10 @@ export default function Home() {
                   <StreamingComponent
                     message={message.message}
                     callBack={() => {
-                      containerRef.current?.scrollTo(
-                        0,
-                        containerRef.current.scrollHeight
-                      );
+                      if (messageListRef.current) {
+                        messageListRef.current.scrollTop =
+                          messageListRef.current.scrollHeight;
+                      }
                     }}
                   />
                 </div>
