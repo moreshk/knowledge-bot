@@ -166,143 +166,139 @@ export default function Home() {
           </svg>
         </div>
       </div>
-      <div className="mx-auto my-auto flex flex-col justify-between gap-4 p-4">
-        <div className={styles.cloud}>
-          <div ref={messageListRef} className={styles.messagelist}>
-            {messages.map((message, index) => {
-              if (
-                message.type === "apiMessage" &&
-                !message.isStreaming &&
-                messages.length === index + 1 &&
-                index !== 0
-              ) {
-                return (
-                  <div
-                    className={`${
-                      message.type === "apiMessage"
-                        ? styles.apibg
-                        : styles.userbg
-                    } flex  gap-1 items-center`}
-                  >
-                    <StreamingComponent message={message.message} />
-                  </div>
-                );
-              }
-              if (message.type === "apiMessage" && message.isStreaming) {
-                return (
-                  <div key={`chatMessage-${index}`}>
-                    <div className={styles.apibg}>
-                      <div
-                        className={`${styles.animateBlink}  w-1.5 h-5 bg-slate-500`}
-                      />
-                    </div>
-                  </div>
-                );
-              }
+      <div className={styles.cloud}>
+        <div ref={messageListRef} className={styles.messagelist}>
+          {messages.map((message, index) => {
+            if (
+              message.type === "apiMessage" &&
+              !message.isStreaming &&
+              messages.length === index + 1 &&
+              index !== 0
+            ) {
               return (
-                <>
-                  <div key={`chatMessage-${index}`}>
-                    <div
-                      className={`flex ${
-                        message.type === "apiMessage"
-                          ? `justify-start`
-                          : `justify-end`
-                      }`}
-                    >
-                      <ReactMarkdown
-                        linkTarget="_blank"
-                        className={
-                          message.type === "apiMessage"
-                            ? styles.apibg
-                            : styles.userbg
-                        }
-                      >
-                        {message.message}
-                      </ReactMarkdown>
-                    </div>
-                  </div>
-                </>
+                <div
+                  className={`${
+                    message.type === "apiMessage" ? styles.apibg : styles.userbg
+                  } flex  gap-1 items-center`}
+                >
+                  <StreamingComponent message={message.message} />
+                </div>
               );
-            })}
-          </div>
-        </div>
-
-        <form onSubmit={handleSubmit} className="relative">
-          <textarea
-            disabled={loading}
-            onKeyDown={handleEnter}
-            ref={textAreaRef}
-            autoFocus={false}
-            rows={1}
-            maxLength={512}
-            id="userInput"
-            name="userInput"
-            placeholder={
-              loading ? "Waiting for response..." : "Type a message ..."
             }
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className={styles.textarea}
-          />
-          <button
-            type="submit"
-            disabled={loading}
-            className={styles.generatebutton}
-          >
-            {loading ? (
-              <div className={styles.loadingwheel}>
-                <LoadingDots color="#000" />
-              </div>
-            ) : (
-              // Send icon SVG in input field
-              <svg
-                viewBox="0 0 20 20"
-                className={styles.svgicon}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-              </svg>
-            )}
-          </button>
-        </form>
-        {showSource === "true" && (
-          <>
-            <div>
-              {[...messages]
-                .reverse()
-                .find((message) => message?.sourceDocs)
-                ?.sourceDocs?.map((doc, index) => (
-                  <div key={`messageSourceDocs-${index}`} className="mt-4">
-                    <h3>Source {index + 1}</h3>
-                    <ReactMarkdown linkTarget="_blank">
-                      {doc.pageContent}
-                    </ReactMarkdown>
-                    <p>
-                      <b>Source:</b> {doc.metadata.source}
-                    </p>
+            if (message.type === "apiMessage" && message.isStreaming) {
+              return (
+                <div key={`chatMessage-${index}`}>
+                  <div className={styles.apibg}>
+                    <div
+                      className={`${styles.animateBlink}  w-1.5 h-5 bg-slate-500`}
+                    />
                   </div>
-                ))}
-            </div>
-          </>
-        )}
-        <div className="text-center py-1 font-semibold text-black  flex justify-center items-center space-x-1">
-          Powered by{" "}
-          <a
-            href="https://koretex.ai"
-            target="_blank"
-            rel="noreferrer"
-            className="underline text-black ml-1 relative"
-          >
-            Koretex AI
-          </a>
-          <DisclaimerButton />
+                </div>
+              );
+            }
+            return (
+              <>
+                <div key={`chatMessage-${index}`}>
+                  <div
+                    className={`flex ${
+                      message.type === "apiMessage"
+                        ? `justify-start`
+                        : `justify-end`
+                    }`}
+                  >
+                    <ReactMarkdown
+                      linkTarget="_blank"
+                      className={
+                        message.type === "apiMessage"
+                          ? styles.apibg
+                          : styles.userbg
+                      }
+                    >
+                      {message.message}
+                    </ReactMarkdown>
+                  </div>
+                </div>
+              </>
+            );
+          })}
         </div>
-        {error && (
-          <div className="border border-red-400 rounded-md p-4">
-            <p className="text-red-500">{error}</p>
-          </div>
-        )}
       </div>
+
+      <form onSubmit={handleSubmit} className="relative px-4">
+        <textarea
+          disabled={loading}
+          onKeyDown={handleEnter}
+          ref={textAreaRef}
+          autoFocus={false}
+          rows={1}
+          maxLength={512}
+          id="userInput"
+          name="userInput"
+          placeholder={
+            loading ? "Waiting for response..." : "Type a message ..."
+          }
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className={styles.textarea}
+        />
+        <button
+          type="submit"
+          disabled={loading}
+          className={styles.generatebutton}
+        >
+          {loading ? (
+            <div className={styles.loadingwheel}>
+              <LoadingDots color="#000" />
+            </div>
+          ) : (
+            // Send icon SVG in input field
+            <svg
+              viewBox="0 0 20 20"
+              className={styles.svgicon}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+            </svg>
+          )}
+        </button>
+      </form>
+      {showSource === "true" && (
+        <>
+          <div>
+            {[...messages]
+              .reverse()
+              .find((message) => message?.sourceDocs)
+              ?.sourceDocs?.map((doc, index) => (
+                <div key={`messageSourceDocs-${index}`} className="mt-4">
+                  <h3>Source {index + 1}</h3>
+                  <ReactMarkdown linkTarget="_blank">
+                    {doc.pageContent}
+                  </ReactMarkdown>
+                  <p>
+                    <b>Source:</b> {doc.metadata.source}
+                  </p>
+                </div>
+              ))}
+          </div>
+        </>
+      )}
+      <div className="text-center py-1 font-semibold text-black  flex justify-center items-center space-x-1">
+        Powered by{" "}
+        <a
+          href="https://koretex.ai"
+          target="_blank"
+          rel="noreferrer"
+          className="underline text-black ml-1 relative"
+        >
+          Koretex AI
+        </a>
+        <DisclaimerButton />
+      </div>
+      {error && (
+        <div className="border border-red-400 rounded-md p-4">
+          <p className="text-red-500">{error}</p>
+        </div>
+      )}
     </>
   );
 }
