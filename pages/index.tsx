@@ -137,7 +137,7 @@ export default function Home() {
         showSource === "true" ? "h-allscreen-auto" : "h-allscreen"
       }`}
     >
-      <div className="border rounded-md">
+      <div className={`${showSource === "true" && "border rounded-md"}`}>
         <div className="h-16 bg-black text-white rounded-b-sm flex justify-between px-4 items-center">
           <div className="flex space-x-2 items-center justify-center">
             <div>
