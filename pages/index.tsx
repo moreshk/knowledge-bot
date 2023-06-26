@@ -315,9 +315,7 @@ export default function Home() {
                         <h3>Source {index + 1}</h3>
                       </AccordionTrigger>
                       <AccordionContent>
-                        <ReactMarkdown linkTarget="_blank">
-                          {doc.pageContent}
-                        </ReactMarkdown>
+                        {doc.pageContent}
                         <p className="mt-2">
                           <b>Source:</b> {doc.metadata.source}
                         </p>
