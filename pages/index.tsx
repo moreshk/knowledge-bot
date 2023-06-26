@@ -8,6 +8,12 @@ import { useRouter } from "next/router";
 import StreamingComponent from "@/components/utils/streaming";
 import { DisclaimerButton } from "@/components/ui/DisclaimerButton";
 import { useBotDetails } from "@/store/useBotDetails";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function Home() {
   const { name, initial_message, bot_profile_pic, setChatbotDetails } =
@@ -172,7 +178,11 @@ export default function Home() {
             <div className="w-5 h-5"></div>
           </div>
         </div>
-        <div className={styles.cloud}>
+        <div
+          className={
+            showSource === "true" ? styles.cloudWithSource : styles.cloud
+          }
+        >
           <div ref={messageListRef} className={styles.messagelist}>
             {messages.map((message, index) => {
               if (
@@ -298,17 +308,22 @@ export default function Home() {
               .reverse()
               .find((message) => message?.sourceDocs)
               ?.sourceDocs?.map((doc, index) => (
-                <div key={`messageSourceDocs-${index}`} className="mt-4">
-                  <h3>Source {index + 1}</h3>
-                  <ReactMarkdown
-                    linkTarget="_blank"
-                    className="max-w-lg flex-wrap"
-                  >
-                    {doc.pageContent}
-                  </ReactMarkdown>
-                  <p>
-                    <b>Source:</b> {doc.metadata.source}
-                  </p>
+                <div key={`messageSourceDocs-${index}`}>
+                  <Accordion type="single" collapsible className="flex-col">
+                    <AccordionItem value={`item-${index}`}>
+                      <AccordionTrigger>
+                        <h3>Source {index + 1}</h3>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <ReactMarkdown linkTarget="_blank">
+                          {doc.pageContent}
+                        </ReactMarkdown>
+                        <p className="mt-2">
+                          <b>Source:</b> {doc.metadata.source}
+                        </p>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                 </div>
               ))}
           </div>

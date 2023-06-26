@@ -217,6 +217,13 @@
   align-items: center;
 }
 
+.cloudWithSource {
+  height: calc((var(--vh, 1vh) * 100) - 470px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .pointsnormal {
   width: 90%;
   height: 90%;
