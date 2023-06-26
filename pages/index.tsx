@@ -275,26 +275,6 @@ export default function Home() {
           )}
         </button>
       </form>
-      {showSource === "true" && (
-        <>
-          <div>
-            {[...messages]
-              .reverse()
-              .find((message) => message?.sourceDocs)
-              ?.sourceDocs?.map((doc, index) => (
-                <div key={`messageSourceDocs-${index}`} className="mt-4">
-                  <h3>Source {index + 1}</h3>
-                  <ReactMarkdown linkTarget="_blank">
-                    {doc.pageContent}
-                  </ReactMarkdown>
-                  <p>
-                    <b>Source:</b> {doc.metadata.source}
-                  </p>
-                </div>
-              ))}
-          </div>
-        </>
-      )}
       <div className="text-center py-1 font-semibold text-black  flex justify-center items-center space-x-1">
         Powered by{" "}
         <a
@@ -307,6 +287,29 @@ export default function Home() {
         </a>
         <DisclaimerButton />
       </div>
+      {showSource === "true" && (
+        <>
+          <div className="flex flex-col">
+            {[...messages]
+              .reverse()
+              .find((message) => message?.sourceDocs)
+              ?.sourceDocs?.map((doc, index) => (
+                <div key={`messageSourceDocs-${index}`} className="mt-4">
+                  <h3>Source {index + 1}</h3>
+                  <ReactMarkdown
+                    linkTarget="_blank"
+                    className="max-w-lg flex-wrap"
+                  >
+                    {doc.pageContent}
+                  </ReactMarkdown>
+                  <p>
+                    <b>Source:</b> {doc.metadata.source}
+                  </p>
+                </div>
+              ))}
+          </div>
+        </>
+      )}
       {error && (
         <div className="border border-red-400 rounded-md p-4">
           <p className="text-red-500">{error}</p>
