@@ -7,12 +7,11 @@ import { Document } from "langchain/document";
 import { useRouter } from "next/router";
 import StreamingComponent from "@/components/utils/streaming";
 import { DisclaimerButton } from "@/components/ui/DisclaimerButton";
-import { useStore } from "zustand";
 import { useBotDetails } from "@/store/useBotDetails";
 
 export default function Home() {
   const { name, initial_message, bot_profile_pic, setChatbotDetails } =
-    useStore(useBotDetails);
+    useBotDetails();
   const chatbotid = useRouter().query?.chatbotId as string;
   const showSource = useRouter().query?.source as string;
   const [query, setQuery] = useState<string>("");
