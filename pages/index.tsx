@@ -137,144 +137,148 @@ export default function Home() {
         showSource === "true" ? "h-allscreen-auto" : "h-allscreen"
       }`}
     >
-      <div className="h-16 bg-black text-white rounded-b-sm flex justify-between px-4 items-center">
-        <div className="flex space-x-2 items-center justify-center">
-          <div>
-            {bot_profile_pic && (
-              <img
-                className="w-10 h-10 rounded-full object-contain"
-                src={bot_profile_pic}
-                alt="Bot profile picture"
-                width={48}
-                height={48}
-              />
-            )}
+      <div className="border rounded-md">
+        <div className="h-16 bg-black text-white rounded-b-sm flex justify-between px-4 items-center">
+          <div className="flex space-x-2 items-center justify-center">
+            <div>
+              {bot_profile_pic && (
+                <img
+                  className="w-10 h-10 rounded-full object-contain"
+                  src={bot_profile_pic}
+                  alt="Bot profile picture"
+                  width={48}
+                  height={48}
+                />
+              )}
+            </div>
+            <div>{name}</div>
           </div>
-          <div>{name}</div>
+          <div className="flex items-center gap-3">
+            <svg
+              onClick={setChatbotDetails}
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 cursor-pointer hover:text-neutral-400 mr-0"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+              />
+            </svg>
+            <div className="w-5 h-5"></div>
+          </div>
         </div>
-        <div className="flex items-center gap-3">
-          <svg
-            onClick={setChatbotDetails}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6 cursor-pointer hover:text-neutral-400 mr-0"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-            />
-          </svg>
-          <div className="w-5 h-5"></div>
-        </div>
-      </div>
-      <div className={styles.cloud}>
-        <div ref={messageListRef} className={styles.messagelist}>
-          {messages.map((message, index) => {
-            if (
-              message.type === "apiMessage" &&
-              !message.isStreaming &&
-              messages.length === index + 1 &&
-              index !== 0
-            ) {
-              return (
-                <div
-                  className={`${
-                    message.type === "apiMessage" ? styles.apibg : styles.userbg
-                  } flex  gap-1 items-center`}
-                >
-                  <StreamingComponent
-                    message={message.message}
-                    callBack={() => {
-                      textAreaRef.current?.focus();
-                      if (messageListRef.current) {
-                        messageListRef.current.scrollTop =
-                          messageListRef.current.scrollHeight;
-                      }
-                    }}
-                  />
-                </div>
-              );
-            }
-            if (message.type === "apiMessage" && message.isStreaming) {
-              return (
-                <div key={`chatMessage-${index}`}>
-                  <div className={styles.apibg}>
-                    <div
-                      className={`${styles.animateBlink}  w-1.5 h-5 bg-slate-500`}
+        <div className={styles.cloud}>
+          <div ref={messageListRef} className={styles.messagelist}>
+            {messages.map((message, index) => {
+              if (
+                message.type === "apiMessage" &&
+                !message.isStreaming &&
+                messages.length === index + 1 &&
+                index !== 0
+              ) {
+                return (
+                  <div
+                    className={`${
+                      message.type === "apiMessage"
+                        ? styles.apibg
+                        : styles.userbg
+                    } flex  gap-1 items-center`}
+                  >
+                    <StreamingComponent
+                      message={message.message}
+                      callBack={() => {
+                        textAreaRef.current?.focus();
+                        if (messageListRef.current) {
+                          messageListRef.current.scrollTop =
+                            messageListRef.current.scrollHeight;
+                        }
+                      }}
                     />
                   </div>
-                </div>
-              );
-            }
-            return (
-              <>
-                <div key={`chatMessage-${index}`}>
-                  <div
-                    className={`flex ${
-                      message.type === "apiMessage"
-                        ? `justify-start`
-                        : `justify-end`
-                    }`}
-                  >
-                    <ReactMarkdown
-                      linkTarget="_blank"
-                      className={
-                        message.type === "apiMessage"
-                          ? styles.apibg
-                          : styles.userbg
-                      }
-                    >
-                      {message.message}
-                    </ReactMarkdown>
+                );
+              }
+              if (message.type === "apiMessage" && message.isStreaming) {
+                return (
+                  <div key={`chatMessage-${index}`}>
+                    <div className={styles.apibg}>
+                      <div
+                        className={`${styles.animateBlink}  w-1.5 h-5 bg-slate-500`}
+                      />
+                    </div>
                   </div>
-                </div>
-              </>
-            );
-          })}
+                );
+              }
+              return (
+                <>
+                  <div key={`chatMessage-${index}`}>
+                    <div
+                      className={`flex ${
+                        message.type === "apiMessage"
+                          ? `justify-start`
+                          : `justify-end`
+                      }`}
+                    >
+                      <ReactMarkdown
+                        linkTarget="_blank"
+                        className={
+                          message.type === "apiMessage"
+                            ? styles.apibg
+                            : styles.userbg
+                        }
+                      >
+                        {message.message}
+                      </ReactMarkdown>
+                    </div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
         </div>
+        <form onSubmit={handleSubmit} className="relative px-4">
+          <textarea
+            disabled={loading}
+            onKeyDown={handleEnter}
+            ref={textAreaRef}
+            autoFocus={false}
+            rows={1}
+            maxLength={512}
+            id="userInput"
+            name="userInput"
+            placeholder={
+              loading ? "Waiting for response..." : "Type a message ..."
+            }
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className={styles.textarea}
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className={styles.generatebutton}
+          >
+            {loading ? (
+              <div className={styles.loadingwheel}>
+                <LoadingDots color="#000" />
+              </div>
+            ) : (
+              // Send icon SVG in input field
+              <svg
+                viewBox="0 0 20 20"
+                className={styles.svgicon}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+              </svg>
+            )}
+          </button>
+        </form>
       </div>
-      <form onSubmit={handleSubmit} className="relative px-4">
-        <textarea
-          disabled={loading}
-          onKeyDown={handleEnter}
-          ref={textAreaRef}
-          autoFocus={false}
-          rows={1}
-          maxLength={512}
-          id="userInput"
-          name="userInput"
-          placeholder={
-            loading ? "Waiting for response..." : "Type a message ..."
-          }
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className={styles.textarea}
-        />
-        <button
-          type="submit"
-          disabled={loading}
-          className={styles.generatebutton}
-        >
-          {loading ? (
-            <div className={styles.loadingwheel}>
-              <LoadingDots color="#000" />
-            </div>
-          ) : (
-            // Send icon SVG in input field
-            <svg
-              viewBox="0 0 20 20"
-              className={styles.svgicon}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-            </svg>
-          )}
-        </button>
-      </form>
       <div className="text-center py-1 font-semibold text-black  flex justify-center items-center space-x-1">
         Powered by{" "}
         <a
