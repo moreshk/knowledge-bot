@@ -2,6 +2,7 @@ import { useBotDetails } from "@/store/useBotDetails";
 import "@/styles/base.css";
 import type { AppProps } from "next/app";
 import { Inter } from "next/font/google";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 const inter = Inter({
@@ -10,8 +11,8 @@ const inter = Inter({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { setChatbotDetails, loading } = useBotDetails();
-
+  const { setChatbotDetails, loading, name } = useBotDetails();
+  const router = useRouter();
   useEffect(() => {
     window.addEventListener("resize", function () {
       document.documentElement.style.setProperty(
@@ -29,8 +30,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   useEffect(() => {
-    setChatbotDetails();
-  }, []);
+    if (router.query.chatbotId) {
+      setChatbotDetails();
+    }
+  }, [router.query.chatbotId]);
 
   if (loading) {
     return (
