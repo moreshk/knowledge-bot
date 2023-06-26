@@ -189,6 +189,7 @@ export default function Home() {
                   <StreamingComponent
                     message={message.message}
                     callBack={() => {
+                      textAreaRef.current?.focus();
                       if (messageListRef.current) {
                         messageListRef.current.scrollTop =
                           messageListRef.current.scrollHeight;
