@@ -21,7 +21,7 @@ export const useBotDetails = create<ChatbotDetailsStore>(set => ({
  business_name: "",
  initial_message: '',
  temperature: 0,
- ai_model: "gpt-3.5-turbo",
+ ai_model: "gpt-4",
  disclaimer: '',
  bot_profile_pic: '',
  loading: true,
